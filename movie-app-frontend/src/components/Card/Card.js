@@ -10,7 +10,7 @@ function Card({_id,title, imgURL, body}){
 
 <div class="card">
   <a href="#">
-    <div class="img1"><img src="https://m.media-amazon.com/images/I/51+YmMEU1BL._AC_.jpg"></img></div>
+    <div class="img1"><img src=""></img></div>
     <div class="img2"></div>
     <div class="title">VIKINGS series Season 1 || Epsoide 1</div>
     <div class="text">Now You can watch the first epsoide of the action series Vikings , wish you interesting watch</div>
