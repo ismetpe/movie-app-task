@@ -4,7 +4,7 @@ import Movies from "../Movies/Movies"
 import Search from "../SearchBar/Search"
 import ReactDOM from "react-dom";
 import { Tabs, Tab, Content } from "../tab";
-
+import './Home.css'
 export default function Home() {
   const [active, setActive] = useState(0);
   const handleClick = e => {
@@ -15,14 +15,14 @@ export default function Home() {
   };
   return (
     <div className="App">
-
-      <Tabs>
-        <Tab onClick={handleClick} active={active === 0} id={0}>
-          Content1
+<Search></Search>
+      <Tabs >
+        <Tab onClick={handleClick} active={active === 0} id={0} >
+          Movies
         </Tab>
 
-        <Tab onClick={handleClick} active={active === 1} id={1}>
-          Content2
+        <Tab onClick={handleClick} active={active === 1} id={1} >
+          TV Series
         </Tab>
       </Tabs>
       <>
