@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace movie_app_task_backend.Models
 {
     public class Media
@@ -8,5 +10,9 @@ namespace movie_app_task_backend.Models
         public string Release_year { get; set; }
         public bool isSeries { get; set;}
         public int Ranking { get; set; }
+
+        public ICollection<Actor> Actor { get; set;}
+
+        public int ActorId { get; set; }
     }
 }
