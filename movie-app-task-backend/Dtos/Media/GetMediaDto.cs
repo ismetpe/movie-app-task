@@ -5,7 +5,7 @@ using movie_app_task_backend.Models;
 
 namespace movie_app_task_backend.Dtos
 {
-    public class GetMedia
+    public class GetMediaDto
     {
          public string Title { get; set; }
         public string Description { get; set; }
