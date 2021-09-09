@@ -59,9 +59,6 @@ namespace movie_app_task_backend.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Ranking")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Release_year")
                         .HasColumnType("TEXT");
 
@@ -76,19 +73,58 @@ namespace movie_app_task_backend.Migrations
                     b.ToTable("Medias");
                 });
 
+            modelBuilder.Entity("movie_app_task_backend.Models.Rating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MediaId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("NumberOfRatings")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SumOfRatings")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MediaId")
+                        .IsUnique();
+
+                    b.ToTable("Ratings");
+                });
+
             modelBuilder.Entity("ActorMedia", b =>
                 {
                     b.HasOne("movie_app_task_backend.Models.Actor", null)
                         .WithMany()
                         .HasForeignKey("ActorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("movie_app_task_backend.Models.Media", null)
                         .WithMany()
                         .HasForeignKey("MediaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("movie_app_task_backend.Models.Rating", b =>
+                {
+                    b.HasOne("movie_app_task_backend.Models.Media", "Media")
+                        .WithOne("Rating")
+                        .HasForeignKey("movie_app_task_backend.Models.Rating", "MediaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Media");
+                });
+
+            modelBuilder.Entity("movie_app_task_backend.Models.Media", b =>
+                {
+                    b.Navigation("Rating");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,6 +12,6 @@ namespace movie_app_task_backend.Data
 
         public DbSet<Media> Medias { get; set; }
         public DbSet<Actor> Actors { get; set; }
-        
+        public DbSet<Rating> Ratings { get; set; }
     }
 }

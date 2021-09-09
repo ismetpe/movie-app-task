@@ -6,13 +6,14 @@ using movie_app_task_backend.Data;
 using movie_app_task_backend.Models;
 
 namespace movie_app_task_backend.Controllers
-{   
+{
+    
     [ApiController]
     [Route("api/[controller]")]
-    public class ActorController : ControllerBase
+    public class RatingController : ControllerBase
     {
-        private readonly DataContex _contex;
-        public ActorController(DataContex contex)
+          private readonly DataContex _contex;
+        public RatingController(DataContex contex)
         {
              _contex = contex;
            
@@ -20,14 +21,14 @@ namespace movie_app_task_backend.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Actor>>> GetActors(){
-            return  await _contex.Actors.ToListAsync();
+        public async Task<ActionResult<IEnumerable<Rating>>> GetRatings(){
+            return  await _contex.Ratings.ToListAsync();
         }
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Actor>> GetActor(int id){
-             return await _contex.Actors.FindAsync(id);
+        public async Task<ActionResult<Rating>> GetRating(int id){
+             return await _contex.Ratings.FindAsync(id);
         }
     }
 }

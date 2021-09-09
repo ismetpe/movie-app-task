@@ -30,7 +30,6 @@ namespace movie_app_task_backend.Migrations
                     Description = table.Column<string>(type: "TEXT", nullable: true),
                     Release_year = table.Column<string>(type: "TEXT", nullable: true),
                     isSeries = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Ranking = table.Column<int>(type: "INTEGER", nullable: false),
                     ActorId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -62,16 +61,46 @@ namespace movie_app_task_backend.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Ratings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    NumberOfRatings = table.Column<int>(type: "INTEGER", nullable: false),
+                    SumOfRatings = table.Column<int>(type: "INTEGER", nullable: false),
+                    MediaId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ratings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ratings_Medias_MediaId",
+                        column: x => x.MediaId,
+                        principalTable: "Medias",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ActorMedia_MediaId",
                 table: "ActorMedia",
                 column: "MediaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ratings_MediaId",
+                table: "Ratings",
+                column: "MediaId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "ActorMedia");
+
+            migrationBuilder.DropTable(
+                name: "Ratings");
 
             migrationBuilder.DropTable(
                 name: "Actors");
