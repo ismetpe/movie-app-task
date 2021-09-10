@@ -7,11 +7,13 @@ namespace movie_app_task_backend.Dtos
 {
     public class GetMediaDto
     {
-         public string Title { get; set; }
+          public int Id { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
         public string Release_year { get; set; }
+        public string img_url { get; set; }
         public bool isSeries { get; set;}
-        public GetRatingDto Rating { get; set; }
-        public ICollection<GetActorDto> Actor { get; set;}
+        public List<GetRatingDto> Ratings { get; set; } = new List<GetRatingDto>();
+        public List<GetActorDto> Actors { get; set;} = new List<GetActorDto>();
     }
 }

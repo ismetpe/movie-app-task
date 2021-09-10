@@ -5,35 +5,31 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using movie_app_task_backend.Data;
+using movie_app_task_backend.Dtos;
 using movie_app_task_backend.Models;
+using movie_app_task_backend.Services.MediaService;
 
 namespace movie_app_task_backend.Controllers
 {
 
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("media")]
     public class MediasController : ControllerBase
     {
-        private readonly DataContex _contex;
-        public MediasController(DataContex contex)
+        private readonly IMediaService _mediaService;
+        public MediasController(IMediaService mediaService)
         {
-            _contex = contex;
+           _mediaService = mediaService;
 
         }
 
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Media>>> GetMedias()
+        [HttpGet("all_movies")]
+        public async Task<ActionResult<IEnumerable<GetMediaDto>>> GetMedias()
         {
-            return await _contex.Medias.ToListAsync();
+            return Ok(await _mediaService.GetAllMedia(false));
         }
 
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Media>> GetMedia(int id)
-        {
-            return await _contex.Medias.FindAsync(id);
-        }
 
     }
 }

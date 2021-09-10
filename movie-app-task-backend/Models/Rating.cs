@@ -8,12 +8,9 @@ namespace movie_app_task_backend.Models
     {
         public int Id { get; set; }
 
-        public int NumberOfRatings { get; set; }
-        public int SumOfRatings { get; set; }
-        
-        public int MediaId { get; set; }
-        public Media Media { get; set; }
+        public int Rating_value { get; set; }
 
-  
+        public int MediaId { get; set; }
+      
     }
 }

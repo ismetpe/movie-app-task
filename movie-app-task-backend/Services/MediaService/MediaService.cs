@@ -17,9 +17,22 @@ namespace movie_app_task_backend.Services.MediaService
 public readonly MediaRepository _mediaRepository;
         
 
-        public Task<List<GetMediaDto>> GetAllMedia(bool isSeries)
+        public  Task<List<GetMediaDto>> GetAllMedia(bool isSeries)
         {
             return  _mediaRepository.GetAllMedia(isSeries);
         }
+
+        public Task<GetMediaDto> GetMedia(int Id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+
+        public Task<List<GetMediaDto>> GetTop10Medias(bool isSeries)
+        {
+            throw new System.NotImplementedException();
+        }
+
+
     }
 }

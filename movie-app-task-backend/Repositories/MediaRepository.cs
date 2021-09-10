@@ -24,15 +24,44 @@ namespace movie_app_task_backend.Repositories
         }
            public async Task<List<GetMediaDto>> GetAllMedia(bool isSeries)
         {
-            var serviceResponse =  new List<GetMediaDto>();
+            var result = new List<GetMediaDto>();
 
-            var medias = await _context.Medias.Include(x => x.Rating)
-                                                 .AsSplitQuery()
-                                                 .Where(x => x.isSeries == isSeries)
-                                                 .ToListAsync();
+            var medias = await _context.Medias.Include(x => x.Ratings).Include(x => x.Actors).AsSplitQuery().Where(x => x.isSeries == isSeries).OrderByDescending(x => x.Ratings.Select(x => x.Rating_value).Average()).ToListAsync();
 
-            serviceResponse = medias.Select(x => _mapper.Map<GetMediaDto>(x)).ToList();
-            return serviceResponse;
+            result = medias.Select(x => _mapper.Map<GetMediaDto>(x)).ToList();
+            return result;
         }
+
+
+        
+        public async Task<GetMediaDto> GetMedia(int Id)
+        {
+            var result = new GetMediaDto();
+
+            var media = await _context.Medias
+                .Include(x => x.Ratings).AsSplitQuery()
+                .Include(x => x.Actors).AsSplitQuery()
+                .FirstOrDefaultAsync(x => x.Id == Id);
+
+           result = _mapper.Map<GetMediaDto>(media);
+            return result;
+        }
+
+
+        public async Task<List<GetMediaDto>> GetTop10Medias(bool isSeries)
+        {
+            var result = new List<GetMediaDto>();
+
+            var Top10Movies = await _context.Medias.Include(x => x.Ratings).AsSplitQuery().Where(x => x.isSeries == isSeries).Take(10).ToListAsync();
+
+            var dtoMovies = Top10Movies.Select(x => _mapper.Map<GetMediaDto>(x)).ToList();
+
+            dtoMovies = dtoMovies.OrderByDescending(x => x.Ratings.Select(x => x.Rating_value).Average()).ToList();
+
+            result = dtoMovies;
+
+            return result;
+        }
+
     }
 }

@@ -80,3 +80,5 @@ C:\Users\ismetpe\Desktop\movieapp\movie-app-task-backend\obj\Debug\net5.0\movie-
 C:\Users\ismetpe\Desktop\movieapp\movie-app-task-backend\obj\Debug\net5.0\ref\movie-app-task-backend.dll
 C:\Users\ismetpe\Desktop\movieapp\movie-app-task-backend\obj\Debug\net5.0\movie-app-task-backend.pdb
 C:\Users\ismetpe\Desktop\movieapp\movie-app-task-backend\obj\Debug\net5.0\movie-app-task-backend.genruntimeconfig.cache
+C:\Users\ismetpe\Desktop\movieapp\movie-app-task-backend\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\ismetpe\Desktop\movieapp\movie-app-task-backend\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
