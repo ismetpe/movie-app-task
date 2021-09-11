@@ -6,10 +6,11 @@ namespace movie_app_task_backend.Services.MediaService
 {
     public interface IMediaService
     {
-        Task<List<GetMediaDto>> GetAllMedia(bool isSeries);
-        Task<List<GetMediaDto>> GetTop10Medias(bool isSeries);
+        Task<List<GetMediaDto>> GetAllMovies(bool isSeries);
+        Task<List<GetMediaDto>> GetAllSeries(bool isSeries);
 
-        Task<GetMediaDto> GetMedia(int Id);
+        Task<List<GetMediaDto>> Get10Series(bool isSeries);
 
+        Task<List<GetMediaDto>> Get10Movies(bool isSeries);
     }
 }

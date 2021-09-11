@@ -11,23 +11,42 @@ using movie_app_task_backend.Services.MediaService;
 
 namespace movie_app_task_backend.Controllers
 {
-
-    [ApiController]
+   [ApiController]
     [Route("media")]
-    public class MediasController : ControllerBase
+    public class VideosController : ControllerBase
     {
-        private readonly IMediaService _mediaService;
-        public MediasController(IMediaService mediaService)
-        {
-           _mediaService = mediaService;
 
+        private readonly IMediaService _mediaService;
+
+        public VideosController(IMediaService mediaService)
+        {
+            _mediaService = mediaService;
+        }
+
+        [HttpGet("all_movies")]
+        public async Task<ActionResult<List<GetMediaDto>>> GetAllMovies()
+        {
+            return Ok(await _mediaService.GetAllMovies(false));
+        }
+
+        [HttpGet("all_series")]
+        public async Task<ActionResult<List<GetMediaDto>>> GetAllSeries()
+        {
+            return Ok(await _mediaService.GetAllSeries(true));
+        }
+
+        [HttpGet("all_movies/ten_movies")]
+        public async Task<ActionResult<List<GetMediaDto>>> Get10Movies()
+        {
+            return Ok(await _mediaService.Get10Movies(false));
         }
 
 
-        [HttpGet("all_movies")]
-        public async Task<ActionResult<IEnumerable<GetMediaDto>>> GetMedias()
+
+        [HttpGet("all_shows/ten_series")]
+        public async Task<ActionResult<List<GetMediaDto>>> Get10Series()
         {
-            return Ok(await _mediaService.GetAllMedia(false));
+            return Ok(await _mediaService.Get10Series(true));
         }
 
 

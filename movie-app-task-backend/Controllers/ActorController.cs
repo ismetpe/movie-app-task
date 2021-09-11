@@ -11,8 +11,8 @@ namespace movie_app_task_backend.Controllers
     [Route("api/[controller]")]
     public class ActorController : ControllerBase
     {
-        private readonly DataContex _contex;
-        public ActorController(DataContex contex)
+        private readonly DataContext _contex;
+        public ActorController(DataContext contex)
         {
              _contex = contex;
            
