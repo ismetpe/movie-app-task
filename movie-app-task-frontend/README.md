@@ -1,9 +1,17 @@
-# Getting Started with Create React App
+# Movie Application 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+It is an application for users who love to find perfect movie or series for themselves.They can rate anonimusly and search for movies and series.
+They can see description of the media,ratings and release date.
+
+This project is created in Reactjs and .NET Core 5.0
+Reactjs is used for front-end development and .NET Core 5.0 is used for back-end development.
+
+Starting front-end instructions are below this message.
+Starting back-end instructions: dotnet run.
 
 ## Available Scripts
-
+before this : 'npm install'
 In the project directory, you can run:
 
 ### `npm start`

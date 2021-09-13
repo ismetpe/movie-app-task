@@ -31,9 +31,13 @@ const Movie = (props) => {
       alignItems: 'center',
     },
   });
-  const [value, setValue] = React.useState(2);
+
+
+  const [value, setValue] = React.useState(3);
   const [hover, setHover] = React.useState(-1);
   const classes = useStyles();
+
+
 
   const url = "https://localhost:5001/"
 
@@ -69,7 +73,7 @@ const Movie = (props) => {
         value={value}
         precision={0.5}
         onChange={(event, newValue) => {
-          console.log(value + " " + props.id);
+
           addRating(newValue,props.id)
           setValue(newValue);
         }}

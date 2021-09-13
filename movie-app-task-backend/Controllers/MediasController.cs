@@ -50,5 +50,12 @@ namespace movie_app_task_backend.Controllers
         }
 
 
+        [HttpGet("all")]
+        public async Task<ActionResult<List<GetMediaDto>>> GetAllMedia()
+        {
+            return Ok(await _mediaService.GetAllMedia());
+        }
+
+
     }
 }
