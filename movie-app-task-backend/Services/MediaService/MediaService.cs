@@ -7,6 +7,10 @@ using movie_app_task_backend.Data;
 using movie_app_task_backend.Dtos;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Text.RegularExpressions;
+using movie_app_task_backend.Models;
+
 namespace movie_app_task_backend.Services.MediaService
 {
     public class MediaService : IMediaService
@@ -23,11 +27,17 @@ namespace movie_app_task_backend.Services.MediaService
         {
                        var result = new List<GetMediaDto>();
 
-            var allMovies = await _context.Medias.Include(x => x.Ratings).AsSplitQuery().Include(x => x.Actors).AsSplitQuery().Where(x => x.isSeries == isSeries).Take(10).ToListAsync();
-
-            var allMoviesdto = allMovies.Select(x => _mapper.Map<GetMediaDto>(x)).ToList();
-            allMoviesdto = allMoviesdto.OrderByDescending(x => x.Ratings.Select(x => x.Rating_value).Average()).ToList();
-            
+            var allMoviesdto=( (await _context.Medias
+            .Include(x => x.Ratings)
+            .AsSplitQuery()
+            .Include(x => x.Actors)
+            .AsSplitQuery()
+            .Where(x => x.isSeries == isSeries)
+            .Take(10)
+            .ToListAsync())
+            .Select(x => _mapper.Map<GetMediaDto>(x))
+            .ToList())
+            .OrderByDescending(x => x.Ratings.Select(x => x.Rating_value).Average()).ToList();
             result = allMoviesdto;
             return result;
         }
@@ -36,11 +46,17 @@ namespace movie_app_task_backend.Services.MediaService
         {
           var result = new List<GetMediaDto>();
 
-            var allSeries= await _context.Medias.Include(x => x.Ratings).AsSplitQuery().Include(x => x.Actors).AsSplitQuery().Where(x => x.isSeries == isSeries).Take(10).ToListAsync();
-
-            var allSeriesdto = allSeries.Select(x => _mapper.Map<GetMediaDto>(x)).ToList();
-            allSeriesdto = allSeriesdto.OrderByDescending(x => x.Ratings.Select(x => x.Rating_value).Average()).ToList();
-            
+            var allSeriesdto=( (await _context.Medias
+            .Include(x => x.Ratings)
+            .AsSplitQuery()
+            .Include(x => x.Actors)
+            .AsSplitQuery()
+            .Where(x => x.isSeries == isSeries)
+            .Take(10)
+            .ToListAsync())
+            .Select(x => _mapper.Map<GetMediaDto>(x))
+            .ToList())
+            .OrderByDescending(x => x.Ratings.Select(x => x.Rating_value).Average()).ToList();
             result = allSeriesdto;
             return result;
         }
@@ -48,12 +64,16 @@ namespace movie_app_task_backend.Services.MediaService
         public async Task<List<GetMediaDto>> GetAllMovies(bool isSeries)
         {
                    var result = new List<GetMediaDto>();
-
-            var allMovies = await _context.Medias.Include(x => x.Ratings).AsSplitQuery().Include(x => x.Actors).AsSplitQuery().Where(x => x.isSeries == isSeries).ToListAsync();
-
-            var allMoviesdto = allMovies.Select(x => _mapper.Map<GetMediaDto>(x)).ToList();
-            allMoviesdto = allMoviesdto.OrderByDescending(x => x.Ratings.Select(x => x.Rating_value).Average()).ToList();
-            
+            var allMoviesdto=( (await _context.Medias
+            .Include(x => x.Ratings)
+            .AsSplitQuery()
+            .Include(x => x.Actors)
+            .AsSplitQuery()
+            .Where(x => x.isSeries == isSeries)
+            .ToListAsync())
+            .Select(x => _mapper.Map<GetMediaDto>(x))
+            .ToList())
+            .OrderByDescending(x => x.Ratings.Select(x => x.Rating_value).Average()).ToList();
             result = allMoviesdto;
             return result;
         }
@@ -62,13 +82,39 @@ namespace movie_app_task_backend.Services.MediaService
         {
             var result = new List<GetMediaDto>();
 
-            var allSeries= await _context.Medias.Include(x => x.Ratings).AsSplitQuery().Include(x => x.Actors).AsSplitQuery().Where(x => x.isSeries == isSeries).ToListAsync();
-
-            var allSeriesdto = allSeries.Select(x => _mapper.Map<GetMediaDto>(x)).ToList();
-            allSeriesdto = allSeriesdto.OrderByDescending(x => x.Ratings.Select(x => x.Rating_value).Average()).ToList();
-            
+            var allSeriesdto=( (await _context.Medias
+            .Include(x => x.Ratings)
+            .AsSplitQuery()
+            .Include(x => x.Actors)
+            .AsSplitQuery()
+            .Where(x => x.isSeries == isSeries)
+            .ToListAsync())
+            .Select(x => _mapper.Map<GetMediaDto>(x))
+            .ToList())
+            .OrderByDescending(x => x.Ratings.Select(x => x.Rating_value).Average()).ToList();
             result = allSeriesdto;
             return result;
         }
+
+      public async Task<List<GetMediaDto>> Search(string value)
+        {
+/*
+                var result = new List<GetMediaDto>();
+                var helper = Regex.Split(value, @"\s+").ToList();
+             
+    if (!String.IsNullOrEmpty(value))
+    {     
+          result = await (await _context.Medias.Include(x => x.Ratings).AsSplitQuery().Include(x => x.Actors).AsSplitQuery().Where(s => s.Title.ToUpper().Contains(value.ToUpper()) || s.Description.ToUpper().Contains(value.ToUpper())).ToListAsync()).ToListAsync();
+    
+                     
+    }
+
+          
+
+    return result
+    */
+    throw new NotImplementedException();
+        }
+        
     }
 }

@@ -24,7 +24,7 @@ namespace movie_app_task_backend
         private readonly IConfiguration _configuration;
         public Startup(IConfiguration configuration)
         {
-             _configuration = configuration;
+            _configuration = configuration;
 
         }
 
@@ -42,10 +42,11 @@ namespace movie_app_task_backend
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "movie_app_task_backend", Version = "v1" });
             });
-            services.AddScoped<IMediaService,MediaService>();
-             services.AddScoped<IRatingService,RatingService>();
+            services.AddScoped<IMediaService, MediaService>();
+            services.AddScoped<IRatingService, RatingService>();
             services.AddAutoMapper(typeof(Startup));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +58,9 @@ namespace movie_app_task_backend
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "movie_app_task_backend v1"));
             }
-
+              app.UseCors(
+                 options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader()
+                ) ;
             app.UseHttpsRedirection();
 
             app.UseRouting();

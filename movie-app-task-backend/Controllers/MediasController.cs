@@ -35,7 +35,7 @@ namespace movie_app_task_backend.Controllers
             return Ok(await _mediaService.GetAllSeries(true));
         }
 
-        [HttpGet("all_movies/ten_movies")]
+        [HttpGet("ten_movies")]
         public async Task<ActionResult<List<GetMediaDto>>> Get10Movies()
         {
             return Ok(await _mediaService.Get10Movies(false));
@@ -43,7 +43,7 @@ namespace movie_app_task_backend.Controllers
 
 
 
-        [HttpGet("all_shows/ten_series")]
+        [HttpGet("ten_series")]
         public async Task<ActionResult<List<GetMediaDto>>> Get10Series()
         {
             return Ok(await _mediaService.Get10Series(true));
