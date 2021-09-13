@@ -31,7 +31,7 @@ const moviesList = movies.map((movie) => (
     release_year={movie.release_year}
     actors={movie.Actors}
     imageURL={movie.img_url}
-    rating={movie.ratings.rating_value}
+    rating={movie.ratings}
     description={movie.description}
 //{moviesList}
   />

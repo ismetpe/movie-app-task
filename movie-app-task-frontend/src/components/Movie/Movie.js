@@ -7,6 +7,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import Api from "../../API/API_calls"
+
+import axios from 'axios';
 const Movie = (props) => {
 
   const labels = {
@@ -33,7 +35,15 @@ const Movie = (props) => {
   const [hover, setHover] = React.useState(-1);
   const classes = useStyles();
 
+  const url = "https://localhost:5001/"
 
+
+  const addRating = (value,id) => {
+   return axios.post(`https://localhost:5001/rating/Add`,{rating_value: value, mediaId:id}).then((response) => {
+     console.log(value + " " + id);
+     setValue(value);
+   });
+ };
   
   return (
     <Card  >
@@ -55,10 +65,12 @@ const Movie = (props) => {
       </Card.Content>
       
       <Rating
-        name="hover-feedback"
+        name={props.id}
         value={value}
         precision={0.5}
         onChange={(event, newValue) => {
+          console.log(value + " " + props.id);
+          addRating(newValue,props.id)
           setValue(newValue);
         }}
         onChangeActive={(event, newHover) => {
