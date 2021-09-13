@@ -8,22 +8,9 @@ import axios from "axios";
 
 const Movies = (props) => {
 
-  const [movies, setMovies] = useState([]);
-  const [toggle, setToggle] = useState(0);
-
-  useEffect(() =>{ getAllMovies();
-  },[]);
-const url = "https://localhost:5001/"
 
 
- const getAllMovies = () => {
-  return axios.get(`${url}media/all_movies`).then((response) => {
-    console.log(response.data);
-    setMovies(response.data);
-  });
-};
-
-const moviesList = movies.map((movie) => (
+const moviesList = props.movies.map((movie) => (
   <Movie
     key ={movie.id}
     id={movie.id}
