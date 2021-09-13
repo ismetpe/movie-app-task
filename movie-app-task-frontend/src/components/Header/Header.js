@@ -29,7 +29,7 @@ function Header() {
         <i className="fa fa-bars" aria-hidden="true"></i>
       </a>
       <img className="logo"src={logo} alt="logo img"></img>
-      
+      <h2>VIKING MOVIE APP</h2>
     </div>
   );
 

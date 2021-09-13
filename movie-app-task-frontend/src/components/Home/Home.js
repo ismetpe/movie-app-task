@@ -1,6 +1,7 @@
 import React , { useState }from 'react';
 import PropTypes from 'prop-types';
 import Movies from "../Movies/Movies"
+import Series from "../Series/Series"
 import Search from "../SearchBar/Search"
 import ReactDOM from "react-dom";
 import { Tabs, Tab, Content } from "../tab";
@@ -15,7 +16,7 @@ export default function Home() {
   };
   return (
     <div className="App">
-<Search></Search>
+<Search placeholder="Search for Movie Title …"></Search>
       <Tabs >
         <Tab onClick={handleClick} active={active === 0} id={0} >
           Movies
@@ -30,7 +31,7 @@ export default function Home() {
           <Movies></Movies>
         </Content>
         <Content active={active === 1}>
-          <h1>Content 2</h1>
+         <Series></Series>
         </Content>
       </>
       {/* <Tabs>
